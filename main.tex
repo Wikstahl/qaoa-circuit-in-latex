@@ -1,0 +1,25 @@
+\documentclass[crop]{standalone} % use this to export figures
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{quantikz}
+\usepackage{adjustbox}
+\usepackage{physics}
+%
+% ****** Colors ******
+\definecolor{azure}{RGB}{135, 168, 212}
+\definecolor{amber}{RGB}{255, 214, 92}
+\definecolor{redsalsa}{RGB}{222, 80, 77}
+\definecolor{pistachio}{RGB}{205, 223, 189}
+\definecolor{yelloworange}{RGB}{248, 150, 30}
+
+%
+% ****** Commands ******
+\newcommand*{\gateStyle}[1]{\textsc{#1}}
+\newcommand*{\gateMath}[1]{{#1}}
+\newcommand*{\circuitHadamard}{\gate[style={fill=redsalsa},label style=white]{\gateStyle{H}}}
+
+\begin{document}
+\begin{adjustbox}{width=8.6cm}
+    \input{qaoa}
+\end{adjustbox}
+\end{document}

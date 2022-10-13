@@ -1,0 +1,148 @@
+% !TeX root = main.tex
+\tikzset{
+    meter/.append style={fill=yelloworange},
+    LA/.style = {line width=1pt},
+}
+
+\tikzcdset{
+    arrows={line width=rule_thickness}, 
+    arrow style=tikz, 
+    diagrams={>=stealth[round]},
+}
+
+\begin{quantikz}[row sep=3mm,
+                 column sep=.3cm,
+                 scale=0.6]
+% First row
+\lstick[wires=4]{$\ket{0}^{\otimes n}$}
+\gategroup[wires=4,steps=8,
+           style={white,
+                  opacity=0,
+                  line width=0pt,
+                  rounded corners,
+                  inner xsep=5pt,
+                  inner ysep=20pt}]
+          {Quantum computer}
+& \circuitHadamard% 1
+& \gate[4,nwires={3},
+        label style={black},
+        style={fill=azure}]
+        {e^{-i\gamma_1\hat{H}_C}} % 2
+\gategroup[wires=4,steps=2,
+           style={dashed,
+                  rounded corners,
+                  fill=azure,
+                  opacity=0.3,
+                  inner sep=2pt},
+           background]
+          {level $1$}
+& \gate[4,nwires={3},
+        label style={black},
+        style={fill=azure}]
+        {e^{-i\beta_1\hat{H}_B}} % 2
+& \ \ldots\ \qw% 4
+& \gate[4,nwires={3},
+        style={fill=azure},
+        label style={black}]
+        {e^{-i\gamma_p\hat{H}_C}} % 5
+\gategroup[wires=4,steps=2,
+          style={dashed,
+                 rounded corners,
+                 fill=azure,
+                 opacity=0.3,
+                 inner sep=2pt},
+          background]
+          {level $p$}
+& \gate[4,nwires={3},
+        label style={black},
+        style={fill=azure}]
+        {e^{-i\beta_p\hat{H}_B}} % 6
+& [2mm] \meter[]{} % 7
+& \cw% 8
+&
+\gate[4,
+      nwires={3},
+      cwires={1,2,4},
+      disable auto height,
+      style={fill=pistachio},
+      label style={rotate=0,
+                   black}]{
+      \begin{array}{c}
+        \textbf{Optimize} \\
+        F_p(\vec{\gamma},\vec{\beta})
+      \end{array}} % 9
+\gategroup[wires=4,steps=1,
+           style={white,
+                  opacity=0,
+                  line width=0pt,
+                  rounded corners,
+                  inner xsep=2pt,
+                  inner ysep=0pt},
+           background]
+          {Classical computer}
+\\
+% Second row
+& \circuitHadamard% 1
+& % 2
+& % 3
+& \ \ldots\ \qw% 4
+& % 5
+& % 6
+& [2mm] \meter[]{} % 7
+& \cw% 8
+& % 9
+\\
+% Third row
+& \vdots % 1
+& % 2
+& \vdots % 3
+& % 4
+& % 5
+& \vdots % 6
+& \vdots % 7
+& % 8
+& % 9
+\\
+% Fourth row
+& \circuitHadamard% 1
+& % 2
+& % 3
+& \ \ldots\ \qw% 4
+& % 5
+& % 6
+&[2mm] \meter[]{} % 7
+& \cw% 8
+& % 9
+\\[2em]
+% Sixth row
+& % 1
+&\gategroup[wires=1,
+            steps=5,
+            style={fill=pistachio,
+                   inner sep=5pt,
+                   rounded corners},
+            label style={label position=center,
+                         black,
+                         anchor=north,
+                         yshift=-.2cm}]
+            {Update the angles $(\vec{\gamma},\vec{\beta})$}
+\arrow[LA,u,>=stealth,scale=2] % 2
+&\arrow[LA,u,>=stealth] % 3
+& % 4
+&\arrow[LA,u,>=stealth] % 5
+&\arrow[LA,u,>=stealth] % 6
+&\cw% 7
+&\cw% 8
+&\cwbend{-1} % 9
+\\
+% Seventh Row
+& % 1
+& % 2
+& % 3
+& % 4
+& % 5
+& % 6
+& % 7
+& % 8
+& % 9
+\end{quantikz}
